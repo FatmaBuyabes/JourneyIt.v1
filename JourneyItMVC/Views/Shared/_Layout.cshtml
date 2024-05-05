@@ -7,14 +7,64 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/JourneyItMVC.styles.css" asp-append-version="true" />
+
+    <style>
+        /* Custom CSS for enhanced design */
+
+        /* Font color set to blue */
+        a {
+            color: cadetblue;
+        }
+
+        .navbar-brand img {
+            max-height: 60px; 
+        }
+
+        .nav-link {
+            color: cadetblue; 
+            font-weight: bold;
+            transition: color 0.3s ease; 
+        }
+
+        .navbar-light .navbar-nav .nav-link {
+            color: #14a4bc;
+        }
+        .nav-item .nav-link {
+            color: cadetblue; /* Change the color to cadetblue */
+            font-weight: bold;
+            transition: color 0.3s ease; /* Smooth transition on hover */
+        }
+
+            .navbar-nav .nav-link:hover {
+                color: red; /* Yellow text color on hover */
+            }
+
+        /* Profile dropdown styling */
+        .dropdown-menu {
+            background-color: #f8f9fa; /* Light gray background */
+            border: none;
+        }
+
+        a[b-ax76t4nvcb] {
+            color: #14a4bc;
+        }
+
+            .dropdown-menu .dropdown-item {
+                color: #14a4bc; /* Dark text color */
+            }
+
+                .dropdown-menu .dropdown-item:hover {
+                    background-color: #e2e6ea; /* Light gray background on hover */
+                }
+
+    </style>
 </head>
 <body>
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container-fluid">
-                <!-- Navbar Brand (Replace with your logo) -->
                 <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">
-                    <img src="/Images/Logo.png" alt="Logo" style="height: 80px; width: 80px;">
+                    <img src="/Images/Logo.png" alt="Logo" style="height: 140px; width: 80px;">
                 </a>
 
                 <!-- Toggler Button -->
@@ -23,25 +73,24 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
 
-                <!-- Navbar Links -->
+               
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
-                        
+
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Explore</a>
+                            <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Privacy">Explore</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Pins</a>
+                            <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Privacy">Pins</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Community</a>
+                            <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Privacy">Community</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">About Us</a>
+                            <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Privacy">About Us</a>
                         </li>
                     </ul>
 
-                    <!-- Profile Picture Dropdown -->
                     <div class="dropdown">
                         <a class="nav-link dropdown-toggle" href="#" role="button" id="profileDropdown" data-bs-toggle="dropdown" aria-expanded="false">
                             <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png" alt="Profile Picture" class="rounded-circle" style="width: 40px; height: 40px;">
@@ -65,8 +114,6 @@
             </div>
         </nav>
     </header>
-
-
 
     <div class="container">
         <main role="main" class="pb-3">
