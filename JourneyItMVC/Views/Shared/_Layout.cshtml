@@ -17,7 +17,7 @@
         }
 
         .navbar-brand img {
-            max-height: 60px; 
+            max-height: 80px; 
         }
 
         .nav-link {
@@ -29,15 +29,14 @@
         .navbar-light .navbar-nav .nav-link {
             color: #14a4bc;
         }
+
         .nav-item .nav-link {
-            color: cadetblue; /* Change the color to cadetblue */
-            font-weight: bold;
+            color: #14a4bc; /* Change the color to cadetblue */
+            font-weight: 700;
             transition: color 0.3s ease; /* Smooth transition on hover */
+            font-size: 18px;
         }
 
-            .navbar-nav .nav-link:hover {
-                color: red; /* Yellow text color on hover */
-            }
 
         /* Profile dropdown styling */
         .dropdown-menu {
@@ -48,6 +47,14 @@
         a[b-ax76t4nvcb] {
             color: #14a4bc;
         }
+        
+     
+        .profile-bright {
+            filter: brightness(0.7); /* Example: increase brightness by 20% */
+            transition: filter 0.3s ease; /* Smooth transition effect */
+        }
+
+
 
             .dropdown-menu .dropdown-item {
                 color: #14a4bc; /* Dark text color */
@@ -64,7 +71,7 @@
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container-fluid">
                 <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">
-                    <img src="/Images/Logo.png" alt="Logo" style="height: 140px; width: 80px;">
+                    <img src="/Images/Logo.png" alt="Logo" style="height: 97px; width: 82px;">
                 </a>
 
                 <!-- Toggler Button -->
@@ -78,36 +85,39 @@
                     <ul class="navbar-nav flex-grow-1">
 
                         <li class="nav-item">
-                            <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Privacy">Explore</a>
+                            <a class="nav-link" asp-area="" asp-controller="Feed" asp-action="Explore">Explore</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Privacy">Pins</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Privacy">Community</a>
+                            <a class="nav-link" asp-area="" asp-controller="AddPost" asp-action="Create">Add Post</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Privacy">About Us</a>
+                            <a class="nav-link" asp-area="" asp-controller="Home" asp-action="AboutUs">About Us</a>
                         </li>
                     </ul>
 
+                    <h6>
+                        @(await Html.PartialAsync("_LoginView"))
+                    </h6>
                     <div class="dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" role="button" id="profileDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" id="profileDropdown" data-bs-toggle="dropdown" aria-expanded="false">                          
                             <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png" alt="Profile Picture" class="rounded-circle" style="width: 40px; height: 40px;">
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="profileDropdown">
                             <!-- Profile -->
-                            <li><a class="dropdown-item" href="#">Profile</a></li>
+                            <li><a class="dropdown-item" href="/UserProfile/Index">Profile</a></li>
                             <li><hr class="dropdown-divider"></li>
                             <!-- Login -->
-                            <li><a class="dropdown-item" href="#">Login</a></li>
+                            <li><a class="dropdown-item" href="/Account/Login">Login</a></li>
                             <!-- Sign Up -->
                             <!-- Sign Up -->
-                            <li><a class="dropdown-item" href="@Url.Action("Index", "SignUp")">Sign Up</a></li>
+                            <li><a class="dropdown-item" href="/Account/SignUp">Sign Up</a></li>
 
                             <li><hr class="dropdown-divider"></li>
                             <!-- Logout -->
-                            <li><a class="dropdown-item" href="#">Logout</a></li>
+                            <li><a class="dropdown-item" href="/Account/Logout">Logout</a></li>
                         </ul>
                     </div>
                 </div>
@@ -118,7 +128,20 @@
     <div class="container">
         <main role="main" class="pb-3">
             @RenderBody()
+
         </main>
+
+        <script>
+            // JavaScript to toggle brightness class on profile picture click
+            document.addEventListener("DOMContentLoaded", function () {
+                var profilePicture = document.querySelector("#profileDropdown img");
+
+                profilePicture.addEventListener("click", function () {
+                    this.classList.toggle("profile-bright");
+                });
+            });
+        </script>
+
     </div>
 
     <footer class="border-top footer text-muted">
