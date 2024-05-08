@@ -1,53 +1,41 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using JourneyItMVC.API;
+using Journey.Model.Requests;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using System.Collections.Generic;
 
 namespace JourneyItMVC.Controllers
 {
     public class AddPostController : Controller
     {
-        // GET: /AddPost/Create
-        public IActionResult Create()
+        private readonly JourneyItAPI _api;
+        public AddPostController(JourneyItAPI api)
         {
-            // Populate countries dropdown
-            var countries = new List<SelectListItem>
-            {
-                new SelectListItem { Text = "USA", Value = "USA" },
-                new SelectListItem { Text = "Canada", Value = "Canada" },
-                // Add more countries as needed
-            };
+            _api = api;
+        }
 
-            ViewBag.Countries = countries;
+        [HttpGet]
+        public async Task<IActionResult> Pin(int id)
+        {
+            await _api.Pin(id);
+            return RedirectToAction("Index", "Home");
+        }
+      
 
+        [HttpPost]
+        public async Task<IActionResult> Create(CreatePostRequest post)
+        {
+            await _api.CreatePost(post);
+            return RedirectToAction("Index", "Home");
+        }
+        [HttpGet]
+        public async Task<IActionResult> Create()
+        {
+            var countres = (await _api.GetCountries()).Select(r => new SelectListItem { Text = r.CountryName, Value = r.Id.ToString() });
+            ViewBag.Countries = countres;
             return View();
         }
 
-        //// POST: /AddPost/Create
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public IActionResult Create(AddPost post)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        // Save the blog post to the database
-        //        // Example: SaveToDatabase(post);
-
-        //        // Redirect to a success page or homepage
-        //        return RedirectToAction("Index", "Home");
-        //    }
-
-        //    // If ModelState is not valid, return back to the create form with errors
-        //    // Populate countries dropdown
-        //    var countries = new List<SelectListItem>
-        //    {
-        //        new SelectListItem { Text = "USA", Value = "USA" },
-        //        new SelectListItem { Text = "Canada", Value = "Canada" },
-        //        // Add more countries as needed
-        //    };
-
-        //    ViewBag.Countries = countries;
-
-        //    return View(post);
-        //}
     }
 }
 

@@ -1,20 +1,17 @@
 ﻿@using Journey.Model.Requests
 @model CreatePostRequest
 
-
 @{
     ViewData["Title"] = "Create Post";
 }
-<style>
 
-    label {
+<style>
+    .bold-label {
         font-weight: bold;
         color: black;
     }
 
-
-
-    button[type="submit"] {
+    .submit-button {
         margin-top: 20px;
         background-color: #3db1c5;
         color: white;
@@ -25,42 +22,41 @@
         transition: background-color 0.3s ease;
     }
 
-        button[type="submit"]:hover {
+        .submit-button:hover {
             background-color: cadetblue;
         }
-
 </style>
 
-<h2>Create</h2>
+<h2>Create Post</h2>
 
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-6">
             <form asp-action="Create" method="post" enctype="multipart/form-data">
                 <div class="form-group">
-                    <label asp-for="Title" class="control-label"></label>
+                    <label asp-for="Title" class="bold-label"></label>
                     <input asp-for="Title" class="form-control" />
                     <span asp-validation-for="Title" class="text-danger"></span>
                 </div>
                 <div class="form-group">
-                    <label asp-for="Texts" class="control-label"></label>
+                    <label asp-for="Texts" class="bold-label"></label>
                     <textarea asp-for="Texts" class="form-control" rows="5"></textarea>
                     <span asp-validation-for="Texts" class="text-danger"></span>
                 </div>
                 <div class="form-group">
-                    <label asp-for="ImagePath" class="control-label"></label>
+                    <label asp-for="ImagePath" class="bold-label"></label>
                     <input type="file" asp-for="ImagePath" class="form-control-file" />
                     <span asp-validation-for="ImagePath" class="text-danger"></span>
                 </div>
                 <div class="form-group">
-                    <label asp-for="CountryId" class="control-label"></label>
+                    <label asp-for="CountryId" class="bold-label"></label>
                     <select asp-for="CountryId" class="form-control" asp-items="ViewBag.Countries">
                         <option value="">Select Country</option>
                     </select>
                     <span asp-validation-for="CountryId" class="text-danger"></span>
                 </div>
                 <div class="form-group">
-                    <button type="submit">Create</button>
+                    <button type="submit" class="submit-button">Create</button>
                 </div>
             </form>
         </div>

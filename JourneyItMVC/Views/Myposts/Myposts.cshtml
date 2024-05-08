@@ -1,0 +1,55 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@using Journey.Model.Responses
+
+@model List<PostResponse>
+
+<style>
+    .post-container {
+        border: 1px solid #ddd;
+        border-radius: 10px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        padding: 20px;
+        margin-bottom: 20px;
+        position: relative;
+        background-color: #f9f9f9;
+    }
+
+    .post-header {
+        margin-bottom: 10px;
+        font-weight: bold;
+        color: cadetblue;
+    }
+
+    .pin-button {
+        position: absolute;
+        bottom: 5px;
+        right: 5px;
+        background: none;
+        border: none;
+    }
+</style>
+
+<h1 style="color: cadetblue; font-weight: bold;">My Posts</h1>
+
+@foreach (var post in Model)
+{
+    <div class="post-container">
+        <div class="post-header">
+            <p><span style="color: cadetblue;"></span> @post.Username</p>
+            <p><span style="color: cadetblue;"> </span> @post.Title</p>
+            <p><span style="color: cadetblue;"></span> @post.CountryName</p>
+
+        </div>
+        <img src="@("https://localhost:7005/" + post.ImagePath)" alt="Post Image" style="max-width: 100%; height: auto; margin-bottom: 10px;">
+        <p>@post.Text</p>
+        <button class="pin-button"><img src="pin-icon.png" alt="Pin" style="width: 20px; height: 20px;"></button>
+    </div>
+
+}
+
+
+

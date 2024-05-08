@@ -1,0 +1,61 @@
+﻿@using Journey.Model.Responses
+
+@model List<PostResponse>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Pinned</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #fafafa;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .pins-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .pin-item {
+            display: flex;
+            flex-direction: column;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+            .pin-item img {
+                width: 100%;
+                height: auto;
+                border-radius: 10px 10px 0 0;
+            }
+
+        .pin-info {
+            padding: 10px;
+            background-color: #fff;
+        }
+
+            .pin-info p {
+                margin: 5px 0;
+            }
+    </style>
+</head>
+<body>
+    <h1>Pinned</h1>
+    <div class="pins-container">
+        @foreach (var savedPin in Model)
+        {
+            <div class="pin-item">
+                <img src="@("https://localhost:7005/" + savedPin.ImagePath)" alt="Post Image" style="max-width: 100%; height: auto; margin-bottom: 10px;">
+                <div class="pin-info">
+                    <p>User: @savedPin.Username</p>
+                </div>
+            </div>
+        }
+    </div>
+</body>
+</html>

@@ -1,6 +1,5 @@
 ﻿@using Journey.Model.Responses
 @model ProfileResponse
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,126 +8,95 @@
     <title>User Profile</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
-            background-color: #fafafa;
-            margin: 0;
-            padding: 0;
+            background-color: #f8f9fa;
         }
 
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-
-        .profile-header {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin-bottom: 20px;
-        }
-
-            .profile-header img {
-                width: 100px;
-                height: 100px;
-                border-radius: 50%;
-                object-fit: cover;
-                margin-right: 20px;
-            }
-
-            .profile-header h2 {
-                margin: 0;
-            }
-
-        .profile-info {
+        .profile-card {
             background-color: #fff;
-            border: 1px solid #ddd;
-            border-radius: 10px;
+            border-radius: 15px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            margin-top: 70px;
             padding: 20px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            text-align: center;
         }
 
-        .pin-like-buttons {
-            display: flex;
-            justify-content: flex-end;
-            margin-top: 0px;
+        .profile-img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin: 0 auto;
+            margin-top: -75px;
+            border: 5px solid #fff;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
         }
 
-            .pin-like-buttons button {
-                margin-left: 10px;
-                border: none;
-                background-color: transparent;
-                cursor: pointer;
+        .profile-name {
+            font-size: 25px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .profile-email {
+            color: #777;
+        }
+
+        .profile-content {
+            padding: 5px;
+        }
+
+        .profile-links {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+            .profile-links a {
+                margin-right: 20px;
+                text-decoration: none;
+                color: #333;
+                font-weight: bold;
+                transition: color 0.3s;
             }
 
-                .pin-like-buttons button.pin-button::after {
-                    content: "\1F4CC";
-                    font-size: 20px;
+                .profile-links a:hover {
+                    color: cadetblue;
                 }
 
-                .pin-like-buttons button.like-button::after {
-                    content: "\2764";
-                    font-size: 20px
+        .profile-followers-following {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+            .profile-followers-following a {
+                margin-right: 20px;
+                text-decoration: none;
+                color: #333;
+                font-weight: bold;
+                transition: color 0.3s;
+            }
+
+                .profile-followers-following a:hover {
+                    color: cadetblue;
                 }
-
-        .profile-header h2 small {
-            color: #888;
-            font-size: 14px;
-        }
-
-
-        .profile-info h5 {
-            margin-bottom: 5px;
-        }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1> Profile</h1>
-        <div class="profile-header">
-
-            <img src="@Model.ImagePath" alt="User Photo">
-            <h2>@Model.Username</h2>
-        </div>
-
-        <div class="profile-info">
-            <h2>
-                @Model.Username<div></div> <small style="color: #888; font-size: 13px;">Kuwait</small>
-            </h2>
-            <img src="@Model.ImagePath" alt="travel around the world" class="/Images/about-me-image">
-            <div></div>
-
-            <body>
-                this is a pic i took in 2010
-            </body>
-            <div class="pin-like-buttons">
-                <button class="pin-button" title="Pin"></button>
-
+        <h1>Profile</h1>
+        <div class="profile-card">
+            <img src="@("https://localhost:7005/" + Model.ImagePath)" alt="User Photo" class="profile-img">
+            <h2 class="profile-name">@Model.Username</h2>
+            <div class="profile-email">@Model.Email</div>
+            <div class="profile-followers-following">
+                <a href="#">Followers</a>
+                <a href="#">Following</a>
             </div>
-
-
-
-        </div>
-
-
-
-
-
-        <div class="profile-info">
-            <h2>
-                @Model.Username<div></div> <small style="color: #888; font-size: 13px;">Kuwait</small>
-            </h2>
-
-
-            <div></div>
-            <body>
-                hi, i like to travel
-            </body>
-            <div class="pin-like-buttons">
-                <button class="pin-button" title="Pin"></button>
-
+            <div class="profile-links">
+                <a href="/EditProfile/EditProfile">Edit Profile</a>
+                <a href="/myposts/myposts">My Posts</a>
+                <a href="/PinnedPosts/PinnedPosts">My Pins</a>
             </div>
-
+           
         </div>
     </div>
 </body>
