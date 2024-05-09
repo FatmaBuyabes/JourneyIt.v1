@@ -18,14 +18,14 @@ namespace JourneyItMVC.Controllers
         public async Task<IActionResult> Pin(int id)
         {
             await _api.Pin(id);
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Explore", "Feed");
         }
 
         [HttpGet]
         public async Task<IActionResult> Rate(int id, int rating)
         {
             await _api.Rate(id, rating);
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Explore", "Feed");
         }
 
       

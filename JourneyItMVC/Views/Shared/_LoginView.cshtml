@@ -4,7 +4,7 @@
 
 @if (_httpContext.HttpContext.User.Identity.IsAuthenticated)
 {
-    @_httpContext.HttpContext.User.FindFirst(r => r.Type == TokenClaimsConstant.Username).Value <a class="nav-link text-dark" href="/Account/Logout">  </a>
+    @_httpContext.HttpContext.User.FindFirst(r => r.Type == TokenClaimsConstant.Username).Value 
 }
 else
 {

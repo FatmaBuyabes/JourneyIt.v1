@@ -34,7 +34,7 @@
     }
 </style>
 
-<h1 style="color: cadetblue; font-weight: bold;">My Posts</h1>
+<h1 style="color: balck; font-weight: bold;">My Posts</h1>
 
 @foreach (var post in Model)
 {
@@ -47,6 +47,5 @@
         <img src="@("https://localhost:7005/" + post.ImagePath)" alt="Post Image" style="max-width: 100%; height: auto; margin-bottom: 10px;">
         <p>@post.Text</p>
         <a href="/Myposts/EditPost/@post.Id" class="edit-button">Edit</a>
-        <button class="pin-button"><img src="pin-icon.png" alt="Pin" style="width: 20px; height: 20px;"></button>
     </div>
 }

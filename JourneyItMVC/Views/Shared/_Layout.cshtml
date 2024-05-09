@@ -16,76 +16,108 @@
             color: cadetblue;
         }
 
-        .navbar-brand img {
-            max-height: 80px; 
-        }
-
-        .nav-link {
-            color: cadetblue; 
-            font-weight: bold;
-            transition: color 0.3s ease; 
-        }
-
-        .navbar-light .navbar-nav .nav-link {
-            color: #14a4bc;
-        }
-
-        .floating-button {
-            width: 80px;
-            height: 80px;
-            background-color: teal;
-            display: flex;
-            border-radius: 40px;
-            color: white;
-            font-size: 40px;
-            text-decoration: none;
-            align-items: center;
-            box-shadow: 2px 4px 5px rgba(0,0,0,0.25);
-            justify-content: center;
-        }
-
-        .nav-item .nav-link {
-            color: #14a4bc; /* Change the color to cadetblue */
-            font-weight: 700;
-            transition: color 0.3s ease; /* Smooth transition on hover */
-            font-size: 18px;
-        }
-
-
-        /* Profile dropdown styling */
         .dropdown-menu {
-            background-color: #f8f9fa; /* Light gray background */
-            border: none;
+            left: -67px !important;
+        }
+        h6{
+            color: white;
+        }
+
+        .flo {
+            height: 200px;
         }
 
         a[b-ax76t4nvcb] {
+            color: white;
+        }
+
+        .nav-link:focus, .nav-link:hover {
             color: #14a4bc;
         }
-        
-     
-        .profile-bright {
-            filter: brightness(0.7); /* Example: increase brightness by 20% */
-            transition: filter 0.3s ease; /* Smooth transition effect */
+
+        .with-background-image {
+            background-image: url("https://i.redd.it/4z34o5wrt46a1.jpg");
+            background-size: cover; /* Cover the entire navbar */
+            background-position: center; /* Center the background image */
+            height: 200px;
         }
 
+        .navbar {
+            background-color: #fff; /* Navbar background color */
+        }
 
+        .navbar-brand img {
+            max-height: 100px;
+        }
+
+        .navbar-light .navbar-nav .nav-link {
+            color: white;
+        }
+
+        .nav-item .nav-link {
+            color: #14a4bc; /* Navbar link color */
+            font-weight: 700;
+            font-size: 18px;
+            position: relative; /* Required for pseudo-element */
+            transition: color 0.3s ease; /* Smooth transition on color change */
+        }
+
+            /* Create a pseudo-element for the animation */
+            .nav-item .nav-link::before {
+                content: '';
+                position: absolute;
+                width: 100%;
+                height: 2px;
+                bottom: -2px; /* Position the pseudo-element below the link */
+                left: 0;
+                background-color: transparent; /* Initial color of the pseudo-element */
+                transition: background-color 0.3s ease; /* Smooth transition on background-color change */
+            }
+
+
+
+            /* Animation effect when hovering over the navbar links */
+            .nav-item .nav-link:hover::before {
+                background-color: #14a4bc; /* Change the background color on hover */
+            }
+
+
+        .navbar-light .navbar-nav .nav-link:hover {
+            backdrop-filter: blur(10px); /* Add a blur effect on hover */
+            background-color: rgba(255, 255, 255, 0.1);
+            color: black;
+        }
+
+        /* Profile dropdown styling */
+        .dropdown-menu {
+            background-color: rgba(0, 0, 0, 0.4);
+            border: 1px solid #fff;
+            padding: 0.5rem 0; /* Padding */
+            font-size: 16px; /* Font size */
+        }
 
             .dropdown-menu .dropdown-item {
-                color: #14a4bc; /* Dark text color */
+                color: white;
             }
 
                 .dropdown-menu .dropdown-item:hover {
-                    background-color: #e2e6ea; /* Light gray background on hover */
+                    background-color: rgba(0, 0, 0, 0.7);
                 }
+
+
+        .profile-bright {
+            filter: brightness(0.7); /* Increase brightness on profile picture click */
+            transition: filter 0.3s ease; /* Smooth transition effect */
+        }
 
     </style>
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container-fluid">
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light border-bottom box-shadow mb-3 with-background-image">
+            <div class="container-fluid flo">
                 <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">
-                    <img src="/Images/Logo.png" alt="Logo" style="height: 97px; width: 82px;">
+                    <img src="/Images/LogoW.png" alt="Logo" style="height: 140px; width: 100px;">
                 </a>
 
                 <!-- Toggler Button -->
@@ -94,7 +126,7 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
 
-               
+
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
 
@@ -102,10 +134,13 @@
                             <a class="nav-link" asp-area="" asp-controller="Feed" asp-action="Explore">Explore</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Privacy">Pins</a>
+                            <a class="nav-link" asp-area="" asp-controller="PinnedPosts" asp-action="PinnedPosts">Pins</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" asp-area="" asp-controller="AddPost" asp-action="Create">Add Post</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-area="" asp-controller="Myposts" asp-action="Myposts">My Posts</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" asp-area="" asp-controller="Home" asp-action="AboutUs">About Us</a>
@@ -116,7 +151,7 @@
                         @(await Html.PartialAsync("_LoginView"))
                     </h6>
                     <div class="dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" role="button" id="profileDropdown" data-bs-toggle="dropdown" aria-expanded="false">                          
+                        <a class="nav-link dropdown-toggle" href="#" role="button" id="profileDropdown" data-bs-toggle="dropdown" aria-expanded="false">
                             <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png" alt="Profile Picture" class="rounded-circle" style="width: 40px; height: 40px;">
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="profileDropdown">
@@ -142,20 +177,7 @@
     <div class="container">
         <main role="main" class="pb-3">
             @RenderBody()
-            <a href="/AddPost/Create" class="floating-button"> + </a>
         </main>
-
-        <script>
-            // JavaScript to toggle brightness class on profile picture click
-            document.addEventListener("DOMContentLoaded", function () {
-                var profilePicture = document.querySelector("#profileDropdown img");
-
-                profilePicture.addEventListener("click", function () {
-                    this.classList.toggle("profile-bright");
-                });
-            });
-        </script>
-
     </div>
 
     <footer class="border-top footer text-muted">
@@ -163,9 +185,21 @@
             &copy; 2024 - JourneyItMVC - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
         </div>
     </footer>
+
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
+
+    <script>
+        // JavaScript to toggle brightness class on profile picture click
+        document.addEventListener("DOMContentLoaded", function () {
+            var profilePicture = document.querySelector("#profileDropdown img");
+
+            profilePicture.addEventListener("click", function () {
+                this.classList.toggle("profile-bright");
+            });
+        });
+    </script>
 </body>
 </html>

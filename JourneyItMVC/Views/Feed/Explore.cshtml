@@ -3,6 +3,11 @@
 @model List<PostResponse>
 
 <style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f0f0f0;
+    }
+
     .post-container {
         border: 1px solid #ddd;
         border-radius: 10px;
@@ -10,13 +15,14 @@
         padding: 20px;
         margin-bottom: 20px;
         position: relative;
-        background-color: #f9f9f9;
+        background-color: #fff;
     }
+
 
     .post-header {
         margin-bottom: 10px;
         font-weight: bold;
-        color: cadetblue;
+        color: #14a4bc;
     }
 
     .pin-button {
@@ -25,60 +31,9 @@
         right: 5px;
         background: none;
         border: none;
-    }
-    .rating {
-        margin-top: 10px;
-        font-size: 20px;
-    }
-      .star {
-        color: gold;
-        cursor: pointer;
-    }
-</style>
-
-<h1 style="color: cadetblue; font-weight: bold;">Explore</h1>
-
-@foreach (var post in Model)
-{
-    <div class="post-container">
-        <div class="post-header">
-            <p><span style="color: cadetblue;">Username:</span> @post.Username</p>
-            <p><span style="color: cadetblue;">Title:</span> @post.Title</p>
-            <p><span style="color: cadetblue;">Country:</span> @post.CountryName</p>
-        </div>
-        <img src="@("https://localhost:7005/" + post.ImagePath)" alt="Post Image" style="max-width: 100%; height: auto; margin-bottom: 10px;">
-        <p>@post.Text</p>
-        <a href="/AddPost/Pin/@post.Id" class="pin-button">&#128204;</a>
-        <div class="rating" data-post-id="@post.Id" data-average-rating="@post.AverageRatings">
-            @for (int i = 1; i <= 5; i++)
-            {
-                <a href="/AddPost/Rate/@post.Id?rating=@i" class="star" data-value="@i">&#9733;</a>
-            }
-        </div>
-       <a href="/AddPost/Pin/@post.Id" class="pin-button">&#128204;</a>
-    </div>
-   
-}
-
-
-
-@* @model List<PostResponse>
-
-<style>
-    .post-container {
-        border: 1px solid #ddd;
-        border-radius: 10px;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        padding: 20px;
-        margin-bottom: 20px;
-        position: relative;
-        background-color: #f9f9f9;
-    }
-
-    .post-header {
-        margin-bottom: 10px;
-        font-weight: bold;
-        color: cadetblue;
+        color: #14a4bc;
+        font-size: 1.2em;
+        text-decoration: none;
     }
 
     .rating {
@@ -89,57 +44,43 @@
     .star {
         color: gold;
         cursor: pointer;
+        text-decoration: none;
     }
+
+    .pin-button:hover {
+        text-decoration: underline;
+    }
+        .star:hover{
+            text-decoration: none;
+            color: orangered;
+        }
+
+    .post-container img {
+        width: 300px;
+        height: auto;
+        margin-bottom: 10px;
+    }
+
 </style>
 
-<h1 style="color: cadetblue; font-weight: bold;">Explore</h1>
+<h1 style="color: black; font-weight: bold;">Explore</h1>
 
 @foreach (var post in Model)
 {
     <div class="post-container">
         <div class="post-header">
-            <p><span style="color: cadetblue;">Username:</span> @post.Username</p>
-            <p><span style="color: cadetblue;">Title:</span> @post.Title</p>
-            <p><span style="color: cadetblue;">Country:</span> @post.CountryName</p>
+            <p><span style="color: #14a4bc;">Username:</span> @post.Username</p>
+            <p><span style="color: #14a4bc;">Title:</span> @post.Title</p>
+            <p><span style="color: #14a4bc;">Country:</span> @post.CountryName</p>
         </div>
         <img src="@("https://localhost:7005/" + post.ImagePath)" alt="Post Image" style="max-width: 100%; height: auto; margin-bottom: 10px;">
         <p>@post.Text</p>
+        <a href="/AddPost/Pin/@post.Id" class="pin-button">&#128204; </a>
         <div class="rating" data-post-id="@post.Id" data-average-rating="@post.AverageRatings">
             @for (int i = 1; i <= 5; i++)
             {
-                <span class="star" data-value="@i">&#9733;</span>
+                <a href="/AddPost/Rate/@post.Id?rating=@i" class="star" data-value="@i">&#9733;</a>
             }
         </div>
     </div>
 }
-
-<script>
-    document.querySelectorAll('.rating .star').forEach(star => {
-        star.addEventListener('click', () => {
-            const ratingValue = parseInt(star.getAttribute('data-value'));
-            const postId = star.parentElement.getAttribute('data-post-id');
-            const averageRating = parseFloat(star.parentElement.getAttribute('data-average-rating'));
-            const totalRatings = document.querySelectorAll(`.rating[data-post-id="${postId}"] .star`).length;
-
-            fetch(`/AddPost/Rate/${postId}?rating=${ratingValue}`, { method: 'POST' })
-                .then(response => {
-                    if (response.ok) {
-                        // Update the average rating display
-                        const newAverageRating = ((averageRating * totalRatings) + ratingValue) / (totalRatings + 1);
-                        star.parentElement.setAttribute('data-average-rating', newAverageRating.toFixed(1));
-                        star.parentElement.querySelectorAll('.star').forEach((s, index) => {
-                            if (index < newAverageRating) {
-                                s.style.color = 'gold';
-                            } else {
-                                s.style.color = '';
-                            }
-                        });
-                    }
-                });
-        });
-    });
-</script>
-
-@* 
-
- *@
