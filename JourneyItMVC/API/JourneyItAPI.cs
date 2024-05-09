@@ -2,6 +2,8 @@
 using Journey.Model.Responses;
 using Journy.Model;
 using Journy.Model.Auth;
+using Journy.Model.features;
+using Microsoft.AspNetCore.Mvc;
 using System.Net.Http.Headers;
 
 namespace JourneyItMVC.API
@@ -62,13 +64,12 @@ namespace JourneyItMVC.API
             var request = new HttpRequestMessage(HttpMethod.Post, "https://localhost:7005/api/Auth/Profile");
             var content = new MultipartFormDataContent();
             content.Add(new StreamContent(form.Image.OpenReadStream()), form.Image.Name, form.Image.FileName);
-            content.Add(new StringContent(form.Email), "Email");
             content.Add(new StringContent(form.Name), "Name");
             request.Content = content;
             var response = await _api.SendAsync(request);
             response.EnsureSuccessStatusCode();
         }
-
+       
         public async Task<ProfileResponse> GetProfilet()
         {
             var response = await _api
@@ -77,7 +78,22 @@ namespace JourneyItMVC.API
           
             return response;
         }
+        public async Task<ProfileResponse> GetFollowers()
+        {
+            var response = await _api
+                .GetFromJsonAsync<ProfileResponse>($"api/Auth/followers/");
 
+
+            return response;
+        }
+        public async Task<List<ProfileResponse>> GetFollowing()
+        {
+            var response = await _api
+                .GetFromJsonAsync<List<ProfileResponse>>($"api/Auth/following/");
+
+
+            return response;
+        }
         public async Task<List<Country>> GetCountries()
         {
             var response = await _api
@@ -85,6 +101,25 @@ namespace JourneyItMVC.API
 
 
             return response;
+        }
+        //public async Task<IActionResult> DeletePosts(int postId)
+        //{
+        //    var result
+        //        = await _api.DeleteAsync($"api/Post/{postId}");
+
+        //    return result;
+        //}
+
+        //edit/{postId}
+
+        public async Task<bool> EditPost(int postId, EditPostRequest request)
+        {
+            var response = await _api.PostAsJsonAsync($"api/post/edit/{postId}", request);
+            if (response.IsSuccessStatusCode)
+            {
+                return true;
+            }
+            return false;
         }
 
         public async Task<bool> SignUp(SignUpRequest request)
@@ -96,9 +131,18 @@ namespace JourneyItMVC.API
             }
             return false;
         }
-        public async Task<bool> Pin(int postId )
+        public async Task<bool> Pin(int postId)
         {
             var response = await _api.PostAsync($"api/post/pin/{postId}", null);
+            if (response.IsSuccessStatusCode)
+            {
+                return true;
+            }
+            return false;
+        }
+        public async Task<bool> Rate(int postId, int rating)
+        {
+            var response = await _api.PostAsJsonAsync($"api/post/{postId}/rate", new RatingRequest { Ratings = rating });
             if (response.IsSuccessStatusCode)
             {
                 return true;

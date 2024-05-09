@@ -1,9 +1,4 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
-}
-@using Journey.Model.Responses
+﻿@using Journey.Model.Responses
 
 @model List<PostResponse>
 
@@ -31,6 +26,12 @@
         background: none;
         border: none;
     }
+
+    .edit-button {
+        color: cadetblue;
+        text-decoration: underline;
+        cursor: pointer;
+    }
 </style>
 
 <h1 style="color: cadetblue; font-weight: bold;">My Posts</h1>
@@ -42,14 +43,10 @@
             <p><span style="color: cadetblue;"></span> @post.Username</p>
             <p><span style="color: cadetblue;"> </span> @post.Title</p>
             <p><span style="color: cadetblue;"></span> @post.CountryName</p>
-
         </div>
         <img src="@("https://localhost:7005/" + post.ImagePath)" alt="Post Image" style="max-width: 100%; height: auto; margin-bottom: 10px;">
         <p>@post.Text</p>
+        <a href="/Myposts/EditPost/@post.Id" class="edit-button">Edit</a>
         <button class="pin-button"><img src="pin-icon.png" alt="Pin" style="width: 20px; height: 20px;"></button>
     </div>
-
 }
-
-
-

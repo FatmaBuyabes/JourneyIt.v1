@@ -30,6 +30,20 @@
             color: #14a4bc;
         }
 
+        .floating-button {
+            width: 80px;
+            height: 80px;
+            background-color: teal;
+            display: flex;
+            border-radius: 40px;
+            color: white;
+            font-size: 40px;
+            text-decoration: none;
+            align-items: center;
+            box-shadow: 2px 4px 5px rgba(0,0,0,0.25);
+            justify-content: center;
+        }
+
         .nav-item .nav-link {
             color: #14a4bc; /* Change the color to cadetblue */
             font-weight: 700;
@@ -128,7 +142,7 @@
     <div class="container">
         <main role="main" class="pb-3">
             @RenderBody()
-
+            <a href="/AddPost/Create" class="floating-button"> + </a>
         </main>
 
         <script>

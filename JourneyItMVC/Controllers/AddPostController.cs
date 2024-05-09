@@ -20,6 +20,14 @@ namespace JourneyItMVC.Controllers
             await _api.Pin(id);
             return RedirectToAction("Index", "Home");
         }
+
+        [HttpGet]
+        public async Task<IActionResult> Rate(int id, int rating)
+        {
+            await _api.Rate(id, rating);
+            return RedirectToAction("Index", "Home");
+        }
+
       
 
         [HttpPost]
